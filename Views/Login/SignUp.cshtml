@@ -1,0 +1,61 @@
+﻿@model MyAspNetCoreApp.Web.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <meta name="viewport" content="width=device-width" />
+    <title>SignUp</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+    <div class="vh-100 d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="card bg-white">
+                        <div class="card-body p-5">
+                            <form class="mb-3 mt-md-4" asp-controller="Login" asp-action="SignUp" method="post">
+                                <h2 class="fw-bold mb-2 text-uppercase ">Selam</h2>
+                                <p class=" mb-5">Lütfen kullanıcı adı ve şifrenizi girerek kayıt olun</p>
+                                <div class="mb-3">
+                                    <label asp-for="UserName" class="form-label ">Kullanıcı Adı</label>
+                                    <input class="form-control" asp-for="UserName" placeholder="Kullanıcı Adınız..">
+                                    @*<span class="text-danger" asp-validation-for="UserName"></span>*@
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="UserPassword" class="form-label ">Password</label>
+                                    <input type="password" class="form-control" asp-for="UserPassword" placeholder="*******">
+
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-outline-dark" formmethod="post">Kayıt Ol</button>
+
+                                </div>
+                            </form>
+                            <div>
+                                <p class="mb-0  text-center">
+                                    Hesapınız var mı? <a asp-controller="Login" asp-action="Index" class="text-primary fw-bold">
+                                        Giriş
+                                        Yapın..
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pills content -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

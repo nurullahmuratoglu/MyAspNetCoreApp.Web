@@ -1,0 +1,97 @@
+﻿@model List<ProductViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+
+@if (TempData["status"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        @TempData["status"] @*temp data sadece bir kere görülür sayfa yenilenirse silinir*@
+    </div>
+}
+<h1>Index</h1>
+
+
+
+
+<a asp-controller="products" asp-action="add"> ürün ekle</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Kategori</th>
+            <th>Resim</th>
+            <th>İsim</th>
+            <th>Fiyat</th>
+            <th>Stok</th>
+            <th>Renk</th>
+            <th>yayınlansın mı</th>
+            <th>süre</th>
+            <th>açıklama</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr  class="align-middle">
+                <td>@item.Id</td>
+                <td>@item.CategoryName</td>
+                <td>
+                    @if (!String.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img height="100" width="100" src="/images/@(item.ImagePath)" />
+                    }
+                    else
+                    {
+                    
+                    <img height="100" width="100" src="/images/No_Image_Available.jpg" />
+                    
+                    }
+                </td>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Stock</td>
+                <td>@item.Color</td>
+                <td>
+                    @(item.IsPublish? "Evet" : "Hayır")
+                </td>
+                <td>@item.Expire</td>
+                <td>
+                    @if (item.Description.Length > 20)
+                    {
+                        @item.Description.Substring(0,20)
+
+                        <text>...</text>
+                    }
+                    else
+                    {
+                        @item.Description
+                    }
+                </td>
+                <td>
+                    <a asp-controller="products" asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger">sil</a>
+                </td>
+                <td><a asp-controller="products" asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary">Güncelle</a></td>
+                <td><a asp-route="product" asp-route-productid="@item.Id">ürün sayfasına git</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+<a asp-controller="blog" asp-action="article" asp-route-name="makale" asp-route-id="2">makaleye git</a>
+<br />
+
+<a asp-route="productpage" asp-route-page=1 asp-route-pagesize=3>1. sayfadan 3 ürün ver</a>
+<br />
+<a asp-route="productpage" asp-route-page=2 asp-route-pagesize=3>2. sayfadan 2 ürün ver</a>

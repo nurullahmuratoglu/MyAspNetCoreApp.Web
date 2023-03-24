@@ -1,0 +1,67 @@
+﻿@model MyAspNetCoreApp.Web.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <title>Index</title>
+</head>
+<body>
+    @if (TempData["status"] != null)
+    {
+        <div class="alert alert-primary" role="alert">
+            @TempData["status"] @*temp data sadece bir kere görülür sayfa yenilenirse silinir*@
+        </div>
+    }
+    <h1>Login Page</h1>
+    <div class="vh-100 d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="card bg-white">
+                        <div class="card-body p-5">
+                            <form class="mb-3 mt-md-4" asp-controller="Login" asp-action="Index" method="post">
+                                <h2 class="fw-bold mb-2 text-uppercase ">Selam</h2>
+                                <p class=" mb-5">Lütfen kullanıcı adı ve şifrenizi girin!</p>
+                                <div class="mb-3">
+                                    <label asp-for="UserName" class="form-label ">Kullanıcı Adı</label>
+                                    <input class="form-control" asp-for="UserName" placeholder="Kullanıcı Adınız..">
+                                    @*<span class="text-danger" asp-validation-for="UserName"></span>*@
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="UserPassword" class="form-label ">Password</label>
+                                    <input type="password" class="form-control" asp-for="UserPassword" placeholder="*******">
+
+                                </div>
+                                <p class="small"><a class="text-primary" href="#">Forgot password?</a></p>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-outline-dark" formmethod="post">Giriş Yap</button>
+
+                                </div>
+                            </form>
+                            <div>
+                                <p class="mb-0  text-center">
+                                    Hesabınız yok mu?  <a asp-controller="Login" asp-action="SignUp" class="text-primary fw-bold">
+                                        Kayıt Olun
+                                    </a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pills content -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
